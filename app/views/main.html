@@ -1,0 +1,52 @@
+<div class="row">
+
+  <div class="row">
+    <form name="inputForm" id="postForm">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" id="title" ng-model="ctrl.newMessage.title">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea class="form-control" id="message" ng-model="ctrl.newMessage.body" cols="30" rows="10"
+                  title="Body"></textarea>
+      </div>
+      <input class="btn btn-primary" type="submit" value="Send" ng-click="ctrl.send()">
+    </form>
+  </div>
+
+  <div class="row">
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" class="form-control" ng-model="searchText" id="search" placeholder="Input text for search">
+      </div>
+  </div>
+
+  <div class="row">
+    <table id="microPosts" class="table-bordered">
+      <tr>
+        <th>
+          <a ng-click="sortProperty('id')">Post id</a>
+        </th>
+        <th><a ng-click="sortProperty('title')">Post Title</a></th>
+        <th class="col-sm-2"><a ng-click="sortProperty('body')">Post Body</a></th>
+        <th  class="col-sm-1"><a ng-click="sortProperty('userId')">UserId</a></th>
+        <th class="col-sm-2">Actions</th>
+      </tr>
+      <tr ng-repeat="row in ctrl.items | orderBy:orderProperty | filter:searchText">
+        <td>{{row.id}}</td>
+        <td>{{row.title}}</td>
+        <td>
+          <pre>{{row.body}}</pre>
+        </td>
+        <td>{{row.userId}}</td>
+        <td class="col-sm-2">
+          <input class="btn btn-info" type="button" value="Update" ng-click="ctrl.edit(row, $index)"/>
+          <input class="btn btn-danger" type="button" value="Delete" ng-click="ctrl.delete(row, $index)"/>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
